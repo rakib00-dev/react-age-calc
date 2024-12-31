@@ -2,6 +2,25 @@ import { useState } from 'react';
 import Input from './components/Input';
 
 function App() {
+  // let calcYears = currentDate.getFullYear() - years;
+  // let calcMonths = currentDate.getMonth() + 1 - months;
+  // let calcDays = currentDate.getDate() - days;
+
+  // let mL = [
+  //   'January',
+  //   'February',
+  //   'March',
+  //   'April',
+  //   'May',
+  //   'June',
+  //   'July',
+  //   'August',
+  //   'September',
+  //   'October',
+  //   'November',
+  //   'December',
+  // ];
+
   let currentDate = new Date();
   const [inputValue, setInputValue] = useState(
     `${currentDate.getFullYear()}-${currentDate.getMonth()}-${currentDate.getDate()}`
@@ -10,26 +29,40 @@ function App() {
   const [months, setMonths] = useState();
   const [days, setDays] = useState();
 
-  let aYear = 365; //days in a year
-  let aMonth = aYear / 12; //days in a month
-  // let calcYears = currentDate.getFullYear() - years;
-  // let calcMonths = currentDate.getMonth() + 1 - months;
-  // let calcDays = currentDate.getDate() - days;
+  function isLeapYear(year) {
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+  }
 
-  let mL = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+  let inputDay = 2;
+  let inputMonth = 4;
+  let inputYear = 2012;
+
+  let date = new Date();
+  let currentDay = date.getDate();
+  let currentMonth = 1 + date.getMonth();
+  let currentYear = date.getFullYear();
+  let month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  if (isLeapYear(inputYear)) {
+    month[1] = 29; // Update February days to 29 if it's a leap year
+  }
+
+  if (inputDay > currentDay) {
+    currentDay = currentDay + month[currentMonth - 1];
+    currentMonth = currentMonth - 1;
+  }
+
+  if (inputMonth > currentMonth) {
+    currentMonth = currentMonth + 12;
+    currentYear = currentYear - 1;
+  }
+
+  let d = currentDay - inputDay;
+  let m = currentMonth - inputMonth;
+  let y = currentYear - inputYear;
+
+  // document.getElementById('age').innerHTML =
+  console.log('Your Age is ' + y + ' Years ' + m + ' Months ' + d + ' Days');
 
   function takeInputValue(e) {
     setInputValue(e.target.value);
