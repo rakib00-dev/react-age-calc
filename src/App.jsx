@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import Input from './components/Input';
+import Card from './components/Card';
 
 function App() {
-  // let calcYears = currentDate.getFullYear() - years;
-  // let calcMonths = currentDate.getMonth() + 1 - months;
-  // let calcDays = currentDate.getDate() - days;
+  // let calcInputYear = currentDate.getFullYear() - inputYear;
+  // let calcInputMonth = currentDate.getMonth() + 1 - inputMonth;
+  // let calcInputDay = currentDate.getDate() - inputDay;
 
   // let mL = [
   //   'January',
@@ -20,22 +21,21 @@ function App() {
   //   'November',
   //   'December',
   // ];
+  function isLeapYear(year) {
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+  }
 
   let currentDate = new Date();
   const [inputValue, setInputValue] = useState(
     `${currentDate.getFullYear()}-${currentDate.getMonth()}-${currentDate.getDate()}`
   );
-  const [years, setYears] = useState();
-  const [months, setMonths] = useState();
-  const [days, setDays] = useState();
+  const [inputYear, setInputYear] = useState();
+  const [inputMonth, setInputMonth] = useState();
+  const [inputDay, setInputDay] = useState();
 
-  function isLeapYear(year) {
-    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-  }
-
-  let inputDay = 2;
-  let inputMonth = 4;
-  let inputYear = 2012;
+  // let inputDay = 2;
+  // let inputMonth = 4;
+  // let inputYear = 2012;
 
   let date = new Date();
   let currentDay = date.getDate();
@@ -44,7 +44,7 @@ function App() {
   let month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
   if (isLeapYear(inputYear)) {
-    month[1] = 29; // Update February days to 29 if it's a leap year
+    month[1] = 29; // Update February inputDay to 29 if it's a leap year
   }
 
   if (inputDay > currentDay) {
@@ -62,7 +62,7 @@ function App() {
   let y = currentYear - inputYear;
 
   // document.getElementById('age').innerHTML =
-  console.log('Your Age is ' + y + ' Years ' + m + ' Months ' + d + ' Days');
+  console.log('Your Age is ' + y + ' years ' + m + ' month ' + d + ' day');
 
   function takeInputValue(e) {
     setInputValue(e.target.value);
@@ -70,10 +70,10 @@ function App() {
 
   function clickFuntion() {
     console.log('ok');
-    setYears(() => inputValue.split('-')[0]);
-    setMonths(() => inputValue.split('-')[1]);
-    setDays(() => inputValue.split('-')[2]);
-    console.log({ years, months, days });
+    setInputYear(() => inputValue.split('-')[0]);
+    setInputMonth(() => inputValue.split('-')[1]);
+    setInputDay(() => inputValue.split('-')[2]);
+    console.log({ inputYear, inputMonth, inputDay });
   }
 
   return (
@@ -87,26 +87,20 @@ function App() {
         btnClicked={clickFuntion}
       />
       <div className="flex flex-col justify-center items-center">
+        <Card
+          title={''}
+          value={'Your Age is ' + y + ' years ' + m + ' month ' + d + ' day'}
+        />
         <h2 className="text-xl font-bold mb-6 text-center p-4 md:text-3xl">
           Your Age In:
         </h2>
         {/* ////inputs\\\\ */}
 
-        {/* years card */}
-        <div className="card bg-base-100 w-96 border border-t-1 border-black/10 shadow-xl m-5">
-          <div className="card-body flex flex-row">
-            <h2 className="card-title">Years:</h2>
-            <p> </p>
-          </div>
-        </div>
+        {/* Year card */}
+        <Card title={'year:'} value={''} />
 
-        {/* months card */}
-        <div className="card bg-base-100 w-96 border border-t-1 border-black/10 shadow-xl m-5">
-          <div className="card-body flex flex-row">
-            <h2 className="card-title">Months:</h2>
-            <p> </p>
-          </div>
-        </div>
+        {/* Month card */}
+        <Card title={'Month:'} value={''} />
       </div>
     </div>
   );
