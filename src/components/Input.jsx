@@ -1,12 +1,12 @@
-const Input = ({ onchange, inputValue }) => {
+const Input = ({ onchange, inputValue, btnClicked }) => {
   return (
     <div className="flex flex-col justify-center items-center gap-1 md:flex-row">
       <div>
-        <label htmlFor="year">Pick Month/Day/Year from here: </label>
+        <label htmlFor="date">Pick Month/Day/Year from here: </label>
       </div>
       <div className="flex flex-row">
         <input
-          id="year"
+          id="date"
           type="date"
           step="1"
           value={inputValue}
@@ -14,10 +14,9 @@ const Input = ({ onchange, inputValue }) => {
           className="border rounded-r-sm text-center w-fit p-2 bg-transparent border-black rounded-xl"
         />
         <button
-          id="btn"
           type="button"
           className="btn border border-black rounded-r-2xl"
-          // onClick={onchange}
+          onClick={btnClicked}
         >
           Calculate
         </button>
