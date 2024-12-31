@@ -8,12 +8,13 @@ function App() {
   );
   const [years, setYears] = useState();
   const [months, setMonths] = useState();
-  const [weeks, setweeks] = useState();
   const [days, setDays] = useState();
 
-  let calcYears = currentDate.getFullYear() - years;
-  let calcMonths = currentDate.getMonth() + 1 - months;
-  let calcDays = currentDate.getDate() - days;
+  let aYear = 365; //days in a year
+  let aMonth = aYear / 12; //days in a month
+  // let calcYears = currentDate.getFullYear() - years;
+  // let calcMonths = currentDate.getMonth() + 1 - months;
+  // let calcDays = currentDate.getDate() - days;
 
   let mL = [
     'January',
@@ -38,8 +39,6 @@ function App() {
     console.log('ok');
     setYears(() => inputValue.split('-')[0]);
     setMonths(() => inputValue.split('-')[1]);
-    console.log(months);
-
     setDays(() => inputValue.split('-')[2]);
     console.log({ years, months, days });
   }
@@ -64,7 +63,7 @@ function App() {
         <div className="card bg-base-100 w-96 border border-t-1 border-black/10 shadow-xl m-5">
           <div className="card-body flex flex-row">
             <h2 className="card-title">Years:</h2>
-            <p>{currentDate.getFullYear() - years} </p>
+            <p> </p>
           </div>
         </div>
 
@@ -72,7 +71,7 @@ function App() {
         <div className="card bg-base-100 w-96 border border-t-1 border-black/10 shadow-xl m-5">
           <div className="card-body flex flex-row">
             <h2 className="card-title">Months:</h2>
-            <p>{Math.abs(calcMonths)} </p>
+            <p> </p>
           </div>
         </div>
       </div>
